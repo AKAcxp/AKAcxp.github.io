@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超炫酷自我介绍</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        :root {
+            --primary-color: #8A2BE2;
+            /* 紫色 */
+            --secondary-color: #00BFFF;
+            /* 深天蓝 */
+            --accent-color: #FF1493;
+            /* 深粉红 */
+            --dark-color: #121212;
+            --light-color: #f8f9fa;
+            --text-color: #ffffff;
+            --bg-color: #121212;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            perspective: 1000px;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 霓虹灯效果 */
+        .neon-border {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80vh;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color)) border-box;
+            box-shadow: 0 0 20px var(--primary-color),
+                0 0 30px var(--secondary-color),
+                0 0 40px var(--accent-color);
+            animation: borderFlow 8s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes borderFlow {
+            0% {
+                border-image-source: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color));
+            }
+
+            25% {
+                border-image-source: linear-gradient(180deg, var(--secondary-color), var(--accent-color), var(--primary-color), var(--secondary-color));
+            }
+
+            50% {
+                border-image-source: linear-gradient(270deg, var(--accent-color), var(--primary-color), var(--secondary-color), var(--accent-color));
+            }
+
+            75% {
+                border-image-source: linear-gradient(360deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color));
+            }
+
+            100% {
+                border-image-source: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color));
+            }
+        }
+
+        /* 粒子背景 */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* 主要内容 */
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            max-width: 1200px;
+            z-index: 2;
+            padding: 40px;
+        }
+
+        .glitch-title {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            color: var(--text-color);
+            text-shadow: 0 0 10px var(--primary-color),
+                0 0 20px var(--secondary-color),
+                0 0 30px var(--accent-color);
+            animation: glitchText 3s infinite;
+        }
+
+        @keyframes glitchText {
+            0% {
+                text-shadow: 0 0 10px var(--primary-color),
+                    0 0 20px var(--secondary-color),
+                    0 0 30px var(--accent-color);
+                transform: translateX(0);
+            }
+
+            5% {
+                text-shadow: -2px 0 var(--accent-color);
+                transform: translateX(2px);
+            }
+
+            10% {
+                text-shadow: 2px 0 var(--primary-color);
+                transform: translateX(-2px);
+            }
+
+            15% {
+                text-shadow: 0 0 10px var(--primary-color),
+                    0 0 20px var(--secondary-color),
+                    0 0 30px var(--accent-color);
+                transform: translateX(0);
+            }
+
+            100% {
+                text-shadow: 0 0 10px var(--primary-color),
+                    0 0 20px var(--secondary-color),
+                    0 0 30px var(--accent-color);
+                transform: translateX(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 3D旋转卡片 */
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .card {
+            width: 250px;
+            height: 300px;
+            position: relative;
+            perspective: 1500px;
+            margin-bottom: 30px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            cursor: pointer;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            overflow: hidden;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(0, 191, 255, 0.8));
+            color: white;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.8), rgba(138, 43, 226, 0.8));
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* 霓虹按钮 */
+        .neon-button {
+            position: relative;
+            display: inline-block;
+            padding: 15px 40px;
+            margin-top: 50px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: 0.5s;
+            letter-spacing: 4px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .neon-button:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+            box-shadow: 0 0 5px var(--primary-color),
+                0 0 25px var(--primary-color),
+                0 0 50px var(--primary-color),
+                0 0 100px var(--primary-color);
+        }
+
+        .neon-button span {
+            position: absolute;
+            display: block;
+        }
+
+        .neon-button span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color));
+            animation: btn-anim1 1s linear infinite;
+        }
+
+        @keyframes btn-anim1 {
+            0% {
+                left: -100%;
+            }
+
+            50%,
+            100% {
+                left: 100%;
+            }
+        }
+
+        .neon-button span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--primary-color));
+            animation: btn-anim2 1s linear infinite;
+            animation-delay: 0.25s;
+        }
+
+        @keyframes btn-anim2 {
+            0% {
+                top: -100%;
+            }
+
+            50%,
+            100% {
+                top: 100%;
+            }
+        }
+
+        .neon-button span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, var(--primary-color));
+            animation: btn-anim3 1s linear infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes btn-anim3 {
+            0% {
+                right: -100%;
+            }
+
+            50%,
+            100% {
+                right: 100%;
+            }
+        }
+
+        .neon-button span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, var(--primary-color));
+            animation: btn-anim4 1s linear infinite;
+            animation-delay: 0.75s;
+        }
+
+        @keyframes btn-anim4 {
+            0% {
+                bottom: -100%;
+            }
+
+            50%,
+            100% {
+                bottom: 100%;
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .glitch-title {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 90%;
+                max-width: 300px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="particles-js"></div>
+        <div class="neon-border"></div>
+
+        <div class="content">
+            <h1 class="glitch-title">我的自我介绍</h1>
+            <p class="subtitle">突破常规 · 探索无限</p>
+
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-icon">?</div>
+                            <h3 class="card-title">技术能力</h3>
+                            <p class="card-desc">点击翻转了解更多</p>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">技术能力</h3>
+                            <p class="card-desc">精通前端和后端开发，熟悉各种编程语言和框架，能够构建高性能、可扩展的应用程序。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-icon">?</div>
+                            <h3 class="card-title">创意设计</h3>
+                            <p class="card-desc">点击翻转了解更多</p>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">创意设计</h3>
+                            <p class="card-desc">注重用户体验和视觉美感，能够将创意转化为独特而实用的设计方案。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-icon">?</div>
+                            <h3 class="card-title">项目经验</h3>
+                            <p class="card-desc">点击翻转了解更多</p>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">项目经验</h3>
+                            <p class="card-desc">参与过多个大型项目的开发，擅长团队协作和项目管理，确保项目高质量地按时交付。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-icon">?</div>
+                            <h3 class="card-title">创新思维</h3>
+                            <p class="card-desc">点击翻转了解更多</p>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">创新思维</h3>
+                            <p class="card-desc">保持对新技术的好奇心和学习激情，善于以创新的方式解决复杂问题。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="neon-button">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                联系我
+            </a>
+        </div>
+    </div>
+
+    <!-- 粒子效果库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 配置粒子效果
+        particlesJS("particles-js",{
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#8A2BE2","#00BFFF","#FF1493"]
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#8A2BE2",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // 3D悬停效果
+        document.addEventListener('mousemove',function (e) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                // 如果鼠标在卡片区域内
+                if (Math.abs(x) < rect.width / 2 && Math.abs(y) < rect.height / 2 && !card.querySelector('.card-inner').classList.contains('flipped')) {
+                    card.querySelector('.card-inner').style.transform = `rotateY(${x / 10}deg) rotateX(${-y / 10}deg)`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
