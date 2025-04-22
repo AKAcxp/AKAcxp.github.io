@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历 - 张三</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --secondary-color: #2c3e50;
+            --light-bg: #f8f9fa;
+            --gray: #7f8c8d;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --white: #ffffff;
+            --box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            --box-shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            animation: fadeIn 1s ease;
+            position: relative;
+            background-image: linear-gradient(to bottom right, rgba(52, 152, 219, 0.05), rgba(255, 255, 255, 0.9), rgba(52, 152, 219, 0.05));
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes highlight {
+            0% {
+                background-color: rgba(52, 152, 219, 0.2);
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 20px;
+            animation: slideInLeft 1s ease 0.2s both;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+            animation: slideInRight 1s ease 0.5s both;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            background-color: #f1f1f1;
+            font-size: 80px;
+            color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .avatar::after {
+            content: '点击上传照片';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 12px;
+            padding: 5px;
+            transition: bottom 0.3s ease;
+        }
+
+        .avatar:hover::after {
+            bottom: 0;
+        }
+
+        .contact-info {
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            animation: slideInRight 1s ease 0.4s both;
+        }
+
+        .contact-item {
+            padding: 5px 15px;
+            background-color: var(--light-bg);
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--primary-color);
+            z-index: -1;
+            transition: width 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .contact-item:hover::before {
+            width: 100%;
+        }
+
+        .contact-item:hover a,
+        .contact-item:hover i {
+            color: white;
+        }
+
+        .contact-item i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .contact-item a {
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            color: var(--secondary-color);
+            display: inline-block;
+            margin-top: 0;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-dark);
+            transition: width 0.5s ease;
+        }
+
+        .section:hover h2::after {
+            width: 100%;
+        }
+
+        .job,
+        .education,
+        .project {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s;
+            position: relative;
+            border-left: 3px solid transparent;
+        }
+
+        .job {
+            border-left-color: var(--primary-color);
+        }
+
+        .education {
+            border-left-color: var(--success);
+        }
+
+        .project {
+            border-left-color: var(--warning);
+        }
+
+        .job:hover,
+        .education:hover,
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .section-icon {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 1.5em;
+            color: rgba(52, 152, 219, 0.2);
+            animation: rotateIn 1s ease;
+        }
+
+        @keyframes rotateIn {
+            from {
+                transform: rotate(-90deg);
+                opacity: 0;
+            }
+
+            to {
+                transform: rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .job-title,
+        .degree,
+        .project-name {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.1em;
+        }
+
+        .company,
+        .school,
+        .project-tech {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .date {
+            float: right;
+            color: var(--gray);
+            background-color: var(--light-bg);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 5px;
+            list-style-type: none;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            transition: transform 0.3s ease;
+        }
+
+        ul li:hover::before {
+            transform: scale(1.3);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            box-shadow: 0 3px 6px rgba(52, 152, 219, 0.2);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .skill:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 10px rgba(52, 152, 219, 0.4);
+            background-color: var(--primary-dark);
+        }
+
+        .skill i {
+            margin-right: 5px;
+        }
+
+        .skill.active {
+            background-color: var(--success);
+            animation: highlight 1s ease;
+        }
+
+        .personal-summary {
+            background-color: var(--light-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            position: relative;
+            box-shadow: var(--box-shadow);
+            margin-top: 15px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .personal-summary::before {
+            content: "\201C";
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 3em;
+            color: rgba(52, 152, 219, 0.2);
+            font-family: Georgia, serif;
+        }
+
+        .skill-bar {
+            width: 200px;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            display: inline-block;
+            margin-left: 20px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-switch-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .theme-switch-wrapper:hover {
+            opacity: 1;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 24px;
+            position: relative;
+            width: 50px;
+        }
+
+        .theme-switch input {
+            display: none;
+        }
+
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            background-color: white;
+            bottom: 4px;
+            content: "";
+            height: 16px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 16px;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .theme-switch-wrapper span {
+            margin-left: 10px;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --secondary-color: #ecf0f1;
+            --light-bg: #2c3e50;
+            --gray: #bdc3c7;
+            --white: #2c3e50;
+            background-color: #1a1a1a;
+            color: #ecf0f1;
+        }
+
+        [data-theme="dark"] .container,
+        [data-theme="dark"] .job,
+        [data-theme="dark"] .education,
+        [data-theme="dark"] .project {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        [data-theme="dark"] .contact-item,
+        [data-theme="dark"] .date,
+        [data-theme="dark"] .personal-summary {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        [data-theme="dark"] .skill-bar {
+            background-color: #34495e;
+        }
+
+        [data-theme="dark"] a {
+            color: #3498db;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+
+            .container {
+                box-shadow: none;
+                margin: 0;
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .job:hover,
+            .education:hover,
+            .project:hover,
+            .skill:hover,
+            .contact-item:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .theme-switch-wrapper,
+            .back-to-top {
+                display: none;
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--gray);
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            animation: fadeIn 1s ease 0.8s both;
+        }
+
+        /* 装饰元素样式 */
+        .decoration-dots {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background-image: radial-gradient(circle, var(--primary-color) 3px, transparent 3px);
+            background-size: 18px 18px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .decoration-dots.top-right {
+            top: 40px;
+            right: 40px;
+            transform: rotate(15deg);
+        }
+
+        .decoration-dots.bottom-left {
+            bottom: 40px;
+            left: 40px;
+            transform: rotate(-15deg);
+        }
+
+        .section-divider {
+            margin: 30px 0;
+            height: 4px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            opacity: 0.3;
+            border-radius: 2px;
+        }
+
+        .timeline-connector {
+            position: absolute;
+            left: -20px;
+            top: 50px;
+            bottom: 20px;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-color), rgba(52, 152, 219, 0.1));
+            border-radius: 3px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -28px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 3px solid #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(30deg, var(--primary-color) 12%, transparent 12.5%, transparent 87%, var(--primary-color) 87.5%, var(--primary-color)),
+                linear-gradient(150deg, var(--primary-color) 12%, transparent 12.5%, transparent 87%, var(--primary-color) 87.5%, var(--primary-color)),
+                linear-gradient(30deg, var(--primary-color) 12%, transparent 12.5%, transparent 87%, var(--primary-color) 87.5%, var(--primary-color)),
+                linear-gradient(150deg, var(--primary-color) 12%, transparent 12.5%, transparent 87%, var(--primary-color) 87.5%, var(--primary-color)),
+                linear-gradient(60deg, rgba(52, 152, 219, 0.1) 25%, transparent 25.5%, transparent 75%, rgba(52, 152, 219, 0.1) 75%, rgba(52, 152, 219, 0.1)),
+                linear-gradient(60deg, rgba(52, 152, 219, 0.1) 25%, transparent 25.5%, transparent 75%, rgba(52, 152, 219, 0.1) 75%, rgba(52, 152, 219, 0.1));
+            background-size: 20px 35px;
+            background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        [data-theme="dark"] .background-pattern {
+            opacity: 0.05;
+        }
+
+        .progress-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .section-badge {
+            display: inline-block;
+            position: absolute;
+            right: 20px;
+            top: 0;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3px 10px;
+            font-size: 0.8em;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(125deg, transparent 30%, rgba(52, 152, 219, 0.05) 38%, rgba(52, 152, 219, 0.05) 40%, transparent 48%);
+            background-size: 200% 200%;
+            animation: shine 8s infinite;
+            z-index: -1;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* 页面系统样式 */
+        @media print {
+
+            .background-pattern,
+            .decoration-dots,
+            .animated-background,
+            .progress-bar-container,
+            .section-badge {
+                display: none !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="background-pattern"></div>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="container">
+        <div class="decoration-dots top-right"></div>
+        <div class="decoration-dots bottom-left"></div>
+        <div class="animated-background"></div>
+
+        <header>
+            <div class="avatar">程</div>
+            <h1>程信芃</h1>
+            <p class="subtitle">资深前端开发工程师 / Web 架构师</p>
+        </header>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fa fa-envelope"></i>
+                <a href="mailto:zhangsan@example.com">zhangsan@example.com</a>
+            </div>
+            <div class="contact-item">
+                <i class="fa fa-phone"></i>
+                176-0795-4738
+            </div>
+            <div class="contact-item">
+                <i class="fa fa-map-marker"></i>
+                西安市莲湖区
+            </div>
+            <div class="contact-item">
+                <i class="fa fa-github"></i>
+                <a href="https://github.com/zhangsan" target="_blank">GitHub</a>
+            </div>
+            <div class="contact-item">
+                <i class="fa fa-linkedin"></i>
+                <a href="https://linkedin.com/in/zhangsan" target="_blank">LinkedIn</a>
+            </div>
+            <div class="contact-item">
+                <i class="fa fa-globe"></i>
+                <a href="https://zhangsan.com" target="_blank">个人网站</a>
+            </div>
+        </div>
+
+        <div class="page-navigation">
+            <button class="page-nav-btn active" data-page="page-about">个人简介</button>
+            <button class="page-nav-btn" data-page="page-experience">工作与教育</button>
+            <button class="page-nav-btn" data-page="page-projects">项目经验</button>
+            <button class="page-nav-btn" data-page="page-skills">技能与专长</button>
+            <button class="page-nav-btn" data-page="page-other">其他信息</button>
+        </div>
+
+        <!-- 个人简介页面 -->
+        <div id="page-about" class="page active page-transition">
+            <div id="personal-info" class="section">
+                <div class="section-badge">关于我</div>
+                <h2>个人简介</h2>
+                <i class="fa fa-user section-icon"></i>
+                <div class="personal-summary">
+                    5年前端开发经验，专注于构建响应式、高性能的Web应用。熟悉现代前端框架和工具，注重代码质量和用户体验。团队协作能力强，善于沟通，能够快速适应新技术和环境。热爱开源，有多个个人项目并积极参与社区贡献。目前正在寻找能够充分发挥技术专长并有更大发展空间的机会。
+                </div>
+            </div>
+        </div>
+
+        <!-- 工作与教育页面 -->
+        <div id="page-experience" class="page">
+            <div id="work-experience" class="section">
+                <div class="section-badge">专业经历</div>
+                <h2>工作经历</h2>
+                <i class="fa fa-briefcase section-icon"></i>
+                <div class="timeline-connector"></div>
+
+                <div class="job">
+                    <div class="timeline-dot" style="top: 30px;"></div>
+                    <div>
+                        <span class="job-title">高级前端工程师 / 技术负责人</span> -
+                        <span class="company">未来科技有限公司</span>
+                        <span class="date"><i class="fa fa-calendar"></i> 2020年6月 - 至今</span>
+                    </div>
+                    <ul>
+                        <li>负责公司核心产品的前端架构设计和开发，使用React和TypeScript构建高性能Web应用</li>
+                        <li>推动前端技术栈升级，将传统jQuery项目迁移至现代React框架，提升开发效率50%</li>
+                        <li>优化前端性能，将页面加载时间减少40%，首屏渲染时间降低至1.5秒，显著提升用户体验</li>
+                        <li>带领5人前端团队，制定开发规范和最佳实践，推动代码审查流程和自动化测试</li>
+                        <li>与产品、设计和后端团队紧密合作，设计和实现RESTful API和微服务架构</li>
+                        <li>主导开发了公司组件库系统，显著提高了跨项目组件复用率和UI一致性</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="timeline-dot" style="top: 30px;"></div>
+                    <div>
+                        <span class="job-title">前端开发工程师</span> -
+                        <span class="company">智联互联网科技有限公司</span>
+                        <span class="date"><i class="fa fa-calendar"></i> 2018年3月 - 2020年5月</span>
+                    </div>
+                    <ul>
+                        <li>使用Vue.js开发公司电子商务平台的用户界面，优化用户体验和转化率</li>
+                        <li>实现响应式设计，确保在各种设备（桌面、平板、移动端）上的良好用户体验</li>
+                        <li>参与前端性能优化，减少首屏加载时间30%，实现懒加载、资源压缩和CDN分发</li>
+                        <li>构建可复用的UI组件库，提高开发效率和项目可维护性</li>
+                        <li>与后端团队协作实现数据可视化功能，使用ECharts和D3.js展示复杂数据</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="timeline-dot" style="top: 30px;"></div>
+                    <div>
+                        <span class="job-title">前端开发实习生</span> -
+                        <span class="company">创新网络科技有限公司</span>
+                        <span class="date"><i class="fa fa-calendar"></i> 2017年7月 - 2018年2月</span>
+                    </div>
+                    <ul>
+                        <li>参与公司官网和管理系统的前端开发，使用HTML5、CSS3和JavaScript</li>
+                        <li>学习并实践响应式设计原则，确保网站在不同设备上的兼容性</li>
+                        <li>协助优化网站性能，提升页面加载速度和用户体验</li>
+                        <li>参与前端代码审查，提高代码质量和可维护性</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div id="education" class="section">
+                <div class="section-badge">学习历程</div>
+                <h2>教育背景</h2>
+                <i class="fa fa-graduation-cap section-icon"></i>
+                <div class="timeline-connector"></div>
+
+                <div class="education">
+                    <div class="timeline-dot" style="top: 30px;"></div>
+                    <div>
+                        <span class="degree">计算机科学与技术 硕士学位</span> -
+                        <span class="school">清华大学</span>
+                        <span class="date"><i class="fa fa-calendar"></i> 2018年9月 - 2020年6月</span>
+                    </div>
+                    <p>主修方向：Web系统与技术、人机交互、分布式系统</p>
+                    <ul>
+                        <li>获得校级优秀学生奖学金（2次）</li>
+                        <li>参与校企合作项目"智能Web界面设计系统"，负责前端开发</li>
+                        <li>毕业论文：《基于深度学习的Web用户行为分析与个性化推荐系统》，获优秀论文奖</li>
+                    </ul>
+                </div>
+
+                <div class="education">
+                    <div class="timeline-dot" style="top: 30px;"></div>
+                    <div>
+                        <span class="degree">计算机科学与技术 学士学位</span> -
+                        <span class="school">北京大学</span>
+                        <span class="date"><i class="fa fa-calendar"></i> 2014年9月 - 2018年6月</span>
+                    </div>
+                    <p>主修课程：数据结构、算法分析、操作系统、计算机网络、数据库系统、Web开发</p>
+                    <ul>
+                        <li>GPA：3.8/4.0，专业排名前10%</li>
+                        <li>担任计算机协会技术部部长，组织多次技术讲座和编程比赛</li>
+                        <li>获国家奖学金、优秀学生干部等荣誉</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 项目经验页面 -->
+        <div id="page-projects" class="page">
+            <div id="projects" class="section">
+                <div class="section-badge">项目展示</div>
+                <h2>项目经验</h2>
+                <i class="fa fa-code section-icon"></i>
+                <div class="timeline-connector"></div>
+
+                <div class="project">
+                    <div class="timeline-dot" style="top: 30px;"></div>
+                    <div>
+                        <span class="project-name">企业级数据可视化平台</span> -
+                        <span class="project-tech">React, TypeScript, Redux, Echarts, Node.js</span>
+                        <span class="date"><i class="fa fa-calendar"></i> 2021年1月 - 2022年6月</span>
+                    </div>
+                    <ul>
+                        <li>设计并实现了一套企业级数据可视化解决方案，支持多种数据源和数据格式</li>
+                        <li>开发了20多种可配置的图表组件，支持实时数据更新和交互式分析</li>
+                        <li>实现了拖拽式仪表盘设计器，提升了用户自定义体验，使非技术人员也能创建专业数据报表</li>
+                        <li>集成了数据预处理和分析功能，支持数据筛选、转换和计算</li>
+                        <li>使用Web Socket实现了实时数据推送，支持千级别并发用户</li>
+                        <li>部署后为企业决策提供数据支持，提高了数据分析效率60%</li>
+                    </ul>
+                </div>
+
+                <div class="project">
+                    <div class="timeline-dot" style="top: 30px;"></div>
+                    <div>
+                        <span class="project-name">移动端电子商务平台</span> -
+                        <span class="project-tech">Vue.js, Vuex, Webpack, Express.js, MongoDB</span>
+                        <span class="date"><i class="fa fa-calendar"></i> 2019年3月 - 2020年2月</span>
+                    </div>
+                    <ul>
+                        <li>负责移动端商城的前端架构设计和开发，实现了购物车、订单管理、支付等核心功能</li>
+                        <li>优化移动端性能，实现了懒加载、图片优化和按需渲染，提升了页面加载速度40%</li>
+                        <li>设计并实现了可复用的UI组件库，包括商品卡片、轮播图、下拉刷新等35个组件</li>
+                        <li>实现了离线缓存和状态持久化，提升了弱网和断网环境下的用户体验</li>
+                        <li>配合后端实现了基于用户行为的个性化推荐系统，提升了产品转化率25%</li>
+                    </ul>
+                </div>
+
+                <div class="project">
+                    <div class="timeline-dot" style="top: 30px;"></div>
+                    <div>
+                        <span class="project-name">React组件库开源项目</span> -
+                        <span class="project-tech">React, TypeScript, Storybook, Jest</span>
+                        <span class="date"><i class="fa fa-calendar"></i> 2020年6月 - 至今</span>
+                    </div>
+                    <ul>
+                        <li>开发并维护一个包含40+高质量UI组件的开源React组件库</li>
+                        <li>使用TypeScript提供完整类型支持，确保组件的可用性和稳定性</li>
+                        <li>为每个组件编写详细文档和示例，使用Storybook进行展示</li>
+                        <li>实现100%单元测试覆盖率，确保代码质量和可靠性</li>
+                        <li>在GitHub上获得1000+星标，被多个商业项目采用</li>
+                        <li>定期维护更新，处理社区反馈和问题，已合并50+社区贡献</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技能与专长页面 -->
+        <div id="page-skills" class="page">
+            <div id="skills" class="section">
+                <div class="section-badge">专业技能</div>
+                <h2>技能专长</h2>
+                <i class="fa fa-wrench section-icon"></i>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #3498db; font-size: 1.1em; margin-bottom: 10px;">前端开发</h3>
+                    <div class="skills">
+                        <span class="skill"><i class="fa fa-check-circle"></i> JavaScript (ES6+)</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> TypeScript</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> React</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> Vue.js</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> Redux/Vuex</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> HTML5</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> CSS3/Sass/Less</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> Webpack/Vite</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> Jest/Testing Library</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #3498db; font-size: 1.1em; margin-bottom: 10px;">后端开发</h3>
+                    <div class="skills">
+                        <span class="skill"><i class="fa fa-check-circle"></i> Node.js</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> Express/Koa</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> RESTful API</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> GraphQL</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> MongoDB</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> MySQL</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #3498db; font-size: 1.1em; margin-bottom: 10px;">开发工具与方法</h3>
+                    <div class="skills">
+                        <span class="skill"><i class="fa fa-check-circle"></i> Git</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> CI/CD</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> Docker</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> 敏捷开发</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> 代码审查</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> TDD</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: #3498db; font-size: 1.1em; margin-bottom: 10px;">其他技能</h3>
+                    <div class="skills">
+                        <span class="skill"><i class="fa fa-check-circle"></i> 响应式设计</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> 性能优化</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> UI/UX设计</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> SEO优化</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> 微信小程序</span>
+                        <span class="skill"><i class="fa fa-check-circle"></i> 数据可视化</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 其他信息页面 -->
+        <div id="page-other" class="page">
+            <div id="certificates" class="section">
+                <div class="section-badge">专业认证</div>
+                <h2>证书认证</h2>
+                <i class="fa fa-certificate section-icon"></i>
+
+                <ul>
+                    <li>
+                        <strong>AWS认证解决方案架构师 – 助理级</strong>
+                        <span class="date">2022年</span>
+                    </li>
+                    <li>
+                        <strong>MongoDB认证开发者</strong>
+                        <span class="date">2021年</span>
+                    </li>
+                    <li>
+                        <strong>Google Analytics认证</strong>
+                        <span class="date">2020年</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div id="honors" class="section">
+                <div class="section-badge">个人荣誉</div>
+                <h2>荣誉与成就</h2>
+                <i class="fa fa-trophy section-icon"></i>
+
+                <ul>
+                    <li>
+                        <strong>公司年度最佳技术员工</strong> - 未来科技有限公司
+                        <span class="date">2021年</span>
+                    </li>
+                    <li>
+                        <strong>全国Web前端开发大赛</strong> - 二等奖
+                        <span class="date">2019年</span>
+                    </li>
+                    <li>
+                        <strong>开源项目贡献者</strong> - 为多个知名开源项目贡献代码
+                        <span class="date">2018年至今</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div id="languages" class="section">
+                <div class="section-badge">语言能力</div>
+                <h2>语言能力</h2>
+                <i class="fa fa-language section-icon"></i>
+
+                <ul>
+                    <li>
+                        <strong>中文（母语）</strong>
+                        <div class="skill-bar">
+                            <div class="skill-level" data-width="100%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>英语（流利）</strong> - IELTS 7.5
+                        <div class="skill-bar">
+                            <div class="skill-level" data-width="90%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>日语（入门）</strong> - JLPT N4
+                        <div class="skill-bar">
+                            <div class="skill-level" data-width="30%"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div id="interests" class="section">
+                <div class="section-badge">个人兴趣</div>
+                <h2>兴趣爱好</h2>
+                <i class="fa fa-heart section-icon"></i>
+
+                <div class="skills" style="margin-top: 10px;">
+                    <span class="skill"><i class="fa fa-code"></i> 开源项目</span>
+                    <span class="skill"><i class="fa fa-book"></i> 技术阅读</span>
+                    <span class="skill"><i class="fa fa-music"></i> 古典音乐</span>
+                    <span class="skill"><i class="fa fa-camera"></i> 摄影</span>
+                    <span class="skill"><i class="fa fa-plane"></i> 旅行</span>
+                    <span class="skill"><i class="fa fa-gamepad"></i> 电子游戏</span>
+                </div>
+            </div>
+        </div>
+
+        <footer
+            style="text-align: center; margin-top: 50px; color: #7f8c8d; font-size: 0.9em; border-top: 1px solid #eee; padding-top: 20px;">
+            <p>感谢您花时间阅读我的简历。期待有机会与您合作！</p>
+            <p>最后更新：<span id="updateDate">2023年9月</span></p>
+        </footer>
+    </div>
+
+    <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+    </div>
+
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider"></div>
+        </label>
+        <span>暗色模式</span>
+    </div>
+
+    <script>
+        // 设置更新日期为当前日期
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        document.getElementById('updateDate').textContent = `${year}年${month}月`;
+
+        // 技能点击效果
+        const skills = document.querySelectorAll('.skill');
+        skills.forEach(skill => {
+            skill.addEventListener('click',function () {
+                this.classList.toggle('active');
+
+                // 让技能标签弹出一个提示信息
+                const currentText = this.textContent.trim();
+                const activeState = this.classList.contains('active');
+
+                // 创建或更新提示气泡
+                let tooltip = document.getElementById('skill-tooltip');
+                if (!tooltip) {
+                    tooltip = document.createElement('div');
+                    tooltip.id = 'skill-tooltip';
+                    tooltip.style.position = 'fixed';
+                    tooltip.style.padding = '8px 12px';
+                    tooltip.style.backgroundColor = 'rgba(52, 152, 219, 0.9)';
+                    tooltip.style.color = 'white';
+                    tooltip.style.borderRadius = '4px';
+                    tooltip.style.zIndex = '1000';
+                    tooltip.style.fontSize = '14px';
+                    tooltip.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.2)';
+                    tooltip.style.transition = 'opacity 0.3s';
+                    document.body.appendChild(tooltip);
+                }
+
+                const rect = this.getBoundingClientRect();
+                tooltip.style.left = (rect.left + rect.width / 2 - 100) + 'px';
+                tooltip.style.top = (rect.top - 40) + 'px';
+                tooltip.style.width = '200px';
+                tooltip.style.textAlign = 'center';
+
+                tooltip.textContent = activeState ?
+                    `精通: ${currentText.replace(/^[^\s]+\s/,'')}` :
+                    `技能: ${currentText.replace(/^[^\s]+\s/,'')}`;
+
+                tooltip.style.opacity = '1';
+
+                setTimeout(() => {
+                    tooltip.style.opacity = '0';
+                    setTimeout(() => {
+                        if (tooltip.parentNode) {
+                            document.body.removeChild(tooltip);
+                        }
+                    },300);
+                },1500);
+            });
+        });
+
+        // 使用Intersection Observer实现滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        },{ threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 实现返回顶部按钮
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll',() => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click',() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 语言能力进度条动画
+        const skillLevels = document.querySelectorAll('.skill-level');
+        const skillLevelObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const targetWidth = entry.target.getAttribute('data-width') || '0%';
+                    entry.target.style.width = targetWidth;
+                }
+            });
+        },{ threshold: 0.1 });
+
+        skillLevels.forEach(level => {
+            skillLevelObserver.observe(level);
+        });
+
+        // 实现深色/浅色模式切换
+        const toggleSwitch = document.querySelector('#checkbox');
+        toggleSwitch.addEventListener('change',function () {
+            if (this.checked) {
+                document.documentElement.setAttribute('data-theme','dark');
+                localStorage.setItem('theme','dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme','light');
+            }
+        });
+
+        // 检查本地存储中的主题首选项
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme','dark');
+            toggleSwitch.checked = true;
+        }
+
+        // 点击头像上传图片功能
+        const avatar = document.querySelector('.avatar');
+        avatar.addEventListener('click',function () {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.style.display = 'none';
+            document.body.appendChild(fileInput);
+
+            fileInput.click();
+
+            fileInput.addEventListener('change',function () {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        avatar.innerHTML = '';
+                        avatar.style.backgroundImage = `url(${e.target.result})`;
+                        avatar.style.backgroundSize = 'cover';
+                        avatar.style.backgroundPosition = 'center';
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+                document.body.removeChild(fileInput);
+            });
+        });
+
+        // 添加年龄计算功能
+        function calculateAge(birthDate) {
+            const today = new Date();
+            const birth = new Date(birthDate);
+            let age = today.getFullYear() - birth.getFullYear();
+            const monthDiff = today.getMonth() - birth.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                age--;
+            }
+
+            return age;
+        }
+
+        // 添加打印按钮
+        const printButton = document.createElement('div');
+        printButton.className = 'print-btn';
+        printButton.innerHTML = '<i class="fa fa-print"></i>';
+        printButton.style.position = 'fixed';
+        printButton.style.bottom = '20px';
+        printButton.style.left = '20px';
+        printButton.style.width = '40px';
+        printButton.style.height = '40px';
+        printButton.style.backgroundColor = '#3498db';
+        printButton.style.color = 'white';
+        printButton.style.borderRadius = '50%';
+        printButton.style.display = 'flex';
+        printButton.style.alignItems = 'center';
+        printButton.style.justifyContent = 'center';
+        printButton.style.cursor = 'pointer';
+        printButton.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.2)';
+        printButton.style.zIndex = '100';
+        printButton.style.transition = 'all 0.3s';
+
+        printButton.addEventListener('mouseenter',function () {
+            this.style.backgroundColor = '#2980b9';
+            this.style.transform = 'translateY(-3px)';
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+        });
+
+        printButton.addEventListener('mouseleave',function () {
+            this.style.backgroundColor = '#3498db';
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.2)';
+        });
+
+        printButton.addEventListener('click',function () {
+            window.print();
+        });
+
+        document.body.appendChild(printButton);
+
+        // 页面导航系统
+        const pageButtons = document.querySelectorAll('.page-nav-btn');
+        const pages = document.querySelectorAll('.page');
+
+        pageButtons.forEach(button => {
+            button.addEventListener('click',function () {
+                const targetPageId = this.getAttribute('data-page');
+
+                // 移除所有活动状态
+                pageButtons.forEach(btn => btn.classList.remove('active'));
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+
+                // 设置当前按钮和页面为活动状态
+                this.classList.add('active');
+
+                // 显示目标页面并应用过渡动画
+                const targetPage = document.getElementById(targetPageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    targetPage.classList.add('page-transition');
+                }
+
+                // 重置滚动位置
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 添加页面样式
+        const styleElement = document.createElement('style');
+        styleElement.textContent = `
+            .page {
+                display: none;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+            }
+            
+            .page.active {
+                display: block;
+                opacity: 1;
+            }
+            
+            @keyframes fadeInPage {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .page-transition {
+                animation: fadeInPage 0.5s ease forwards;
+            }
+            
+            .page-nav-btn {
+                padding: 8px 15px;
+                background-color: var(--light-bg);
+                color: var(--secondary-color);
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: 500;
+                box-shadow: var(--box-shadow);
+                margin: 0 5px;
+            }
+            
+            .page-nav-btn:hover {
+                background-color: var(--primary-color);
+                color: white;
+                transform: translateY(-3px);
+                box-shadow: var(--box-shadow-hover);
+            }
+            
+            .page-nav-btn.active {
+                background-color: var(--primary-color);
+                color: white;
+            }
+            
+            .page-navigation {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin: 20px 0 30px;
+                gap: 10px;
+            }
+        `;
+        document.head.appendChild(styleElement);
+    </script>
+</body>
+
+</html>
